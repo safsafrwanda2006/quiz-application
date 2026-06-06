@@ -94,6 +94,32 @@ class _QuizPageState extends State<QuizPage> {
                 }
                 if( questionNum < quizBrain.questionBank.length -1 ){
                 questionNum++;
+                } else {
+                  // Quiz completed - show completion dialog
+                  Future.delayed(Duration(milliseconds: 100), () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Quiz Completed!'),
+                          content: Text('You have completed all questions.\n\nCorrect Answers: ${scoreKeeper.where((icon) => icon.icon == Icons.check).length}/${quizBrain.questionBank.length}'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                // Optionally restart the quiz
+                                setState(() {
+                                  questionNum = 0;
+                                  scoreKeeper = [];
+                                });
+                              },
+                              child: Text('Restart Quiz'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  });
                 }
                 });
               },
@@ -122,6 +148,32 @@ class _QuizPageState extends State<QuizPage> {
 
                 if ( questionNum < quizBrain.questionBank.length -1){
                     questionNum++;
+                } else {
+                  // Quiz completed - show completion dialog
+                  Future.delayed(Duration(milliseconds: 100), () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Quiz Completed!'),
+                          content: Text('You have completed all questions.\n\nCorrect Answers: ${scoreKeeper.where((icon) => icon.icon == Icons.check).length}/${quizBrain.questionBank.length}'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                // Optionally restart the quiz
+                                setState(() {
+                                  questionNum = 0;
+                                  scoreKeeper = [];
+                                });
+                              },
+                              child: Text('Restart Quiz'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  });
                 }
                 });
               },
